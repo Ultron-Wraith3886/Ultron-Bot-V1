@@ -1,0 +1,12 @@
+{
+    "token":"haha i wont put token here",
+    "ownerID":765434202803929099,
+
+    "prefix":"ul!",
+    "exclude_cogs":["__pycache__","archives"],
+    "machine_core":"perspective",
+
+    "api_routers":{
+        "animals":["cats"]
+    }
+}

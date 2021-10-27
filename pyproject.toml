@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "repl_python3_beta_Ultron"
+version = "0.1.0"
+description = ""
+authors = ["Your Name <you@example.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+google-api-python-client = "^2.26.1"
+objsize = "^0.3.3"
+replit = "^3.2.4"
+marisa-trie = "^0.7.7"
+ujson = "^4.2.0"
+cryptography = "^35.0.0"
+grequests = "^0.6.0"
+nextcord = {git = "https://github.com/nextcord/nextcord.git", rev = "master"}
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
