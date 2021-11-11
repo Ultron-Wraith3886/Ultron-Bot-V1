@@ -592,7 +592,7 @@ class MemberModeration(Cog):
         else:
             avatars.append(None)
         roles=[str(role.name) for role in member.roles]
-        infos=[member.created_at,member.joined_at,member.guild_permissions,member.pending,member.premium_since,member.top_role,member.bot,member.is_on_mobile(),member.activity]
+        infos=[member.created_at.strftime("%d %m %Y"),member.joined_at.strftime("%d %m %Y"),member.guild_permissions,member.pending,member.premium_since.strftime("%d %m %Y") if member.premium_since is not None else None,member.top_role,member.bot,member.is_on_mobile(),member.activity]
         flags=[flag for flag in member.public_flags.all()]
         if self.bot.db.ismuted(ctx.guild.id,member.id):
             muted=True
@@ -610,7 +610,7 @@ class MemberModeration(Cog):
         if avatars[2] is not None:
             em.set_image(url=avatars[2])
         fields=[
-            ("__Roles__",roles,False),
+            ("__Roles__","".join(["`",",".join(roles),"`"]),False),
             ("__Original Name__",names[1],True),
             ("__Server Nickname__",names[0],True),
             ("__Creation & Joined at__",f"Created on `{infos[0]}` and Joined this server on `{infos[1]}`",False),
