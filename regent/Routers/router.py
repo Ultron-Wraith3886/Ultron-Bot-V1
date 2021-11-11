@@ -53,16 +53,11 @@ class APIRouter_REST:
         if apis == 'all':
             self.api_allowed=self.api_collection
             for api in self.api_allowed:
-                api=str(api)
-                api_name=list(api)
-                api_name[0]=api_name[0].upper()
-                self.api_names.append("".join(api_name))
+                self.api_names.append(api.capitalize())
         else:
             for api in apis:
                 self.api_allowed.update({api:self.api_collection[api]})
-                api_name=list(api)
-                api_name[0]=api_name[0].upper()
-                self.api_names.append("".join(api_name))
+                self.api_names.append(api.capitalize())
         
         del self.api_names[self.api_names.index('Dog-facts')]
 
@@ -93,16 +88,11 @@ class APIRouter_Anime:
         if apis == 'all':
             self.api_allowed=self.api_collection
             for api in self.api_allowed:
-                api=str(api)
-                api_name=list(api)
-                api_name[0]=api_name[0].upper()
-                self.api_names.append("".join(api_name))
+                self.api_names.append(api.capitalize())
         else:
             for api in apis:
                 self.api_allowed.update({api:self.api_collection[api]})
-                api_name=list(api)
-                api_name[0]=api_name[0].upper()
-                self.api_names.append("".join(api_name))
+                self.api_names.append(api.capitalize())
     async def requestRoute(self,api_name:str='quote',extra_param=''):
         try:
             if 'meth' in self.api_allowed[api_name].keys():

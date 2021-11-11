@@ -29,7 +29,7 @@ class Bot(commands.AutoShardedBot):
         self._cog_router=router.CogRouter(self._configurator.exclude_cogs)
         self._api_router=router.APIRouter_REST('all')
         self._api_router_anime=router.APIRouter_Anime('all')
-        self._api_router_pokedex=router.Pokedex()
+        #self._api_router_pokedex=router.Pokedex()
 
         self._owner_id=self._configurator.ownerID
 
