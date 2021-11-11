@@ -49,7 +49,7 @@ class Bot(commands.AutoShardedBot):
             except Exception as e:
                 print(e)
                 print(f"--Couldn't load {cogs}.py--")
-        self.load_extension('core.Resources.UltronLHS.anti_handling')
+        #self.load_extension('core.Resources.UltronLHS.anti_handling')
         print("\n---Loaded all Extensions---\n\n")
         
     def run(self):
