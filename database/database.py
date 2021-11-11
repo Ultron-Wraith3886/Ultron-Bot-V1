@@ -1,10 +1,12 @@
 import ujson
 
 class Guilds:
-    def __init__(self,filepath="database/guilds.json"):
+    def __init__(self,filepath="database/guilds_json.json"):
         self.fp=filepath
-        with open(filepath,'r') as fp:
+        with open(self.fp,'r') as fp:
             self.dict=ujson.loads(fp.read())
+
+    #Normal Functions - Daniel
         
     def addGuild(self,id,extra_params=None):
         self.dict.update({
@@ -73,13 +75,14 @@ class Guilds:
         })
 
     def removeMute(self,guildID,targetID,cat):
-        print(self.dict)
+        self.dict
         self.dict[str(guildID)][cat].pop(targetID)
     
     def setMuteRole(self,id,role):
         self.dict[id]['muted_role']=role
     
     def getRoleID(self,id,target_id,cat):
+        self.dict
         return self.dict[str(id)][cat][target_id]['roles']
     
     def getMutes(self,id,cat):
@@ -87,5 +90,10 @@ class Guilds:
     
     def getMute(self,id,MemberID,cat):
         return self.dict[str(id)][cat][MemberID]
-    
-    
+
+    def ismuted(self,id,mid):
+        for cat in ['undefined-mutes','minute-mutes','hour-mutes','day-mutes']:
+            if mid in self.dict[str(id)][cat].keys():
+                return True
+
+        return False
