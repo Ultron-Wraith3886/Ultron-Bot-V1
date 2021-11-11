@@ -615,7 +615,7 @@ class MemberModeration(Cog):
             ("__Server Nickname__",names[0],True),
             ("__Creation & Joined at__",f"Created on `{infos[0]}` and Joined this server on `{infos[1]}`",False),
             ("__Used Nitro Boost on__",infos[4] if infos[4] is not None else "Never boosted",False),
-            ("__Top Role__",infos[5].name,False),
+            ("__Top Role__","".join(["`",infos[5].name,"`"]),False),
             ("__Is a Bot?__",infos[6],True),
             ("__Is on Mobile?__",infos[7],True),
             ("__Verification Pending?__",infos[3],True),
