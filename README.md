@@ -9,7 +9,5 @@
 #### Ultron is currently a small bot with some features including Moderation (Channel, Kick-Ban, Mute, Member), Web Scraping and the Overuse of APIs (Animal Images and Facts) and a bit of fun being added. **This bot was built with [_Nextcord_](https://github.com/nextcord/nextcord)** and [Python](https://en.wikipedia.org/wiki/Python_(programming_language)). 
 
 ## Status
-#### ```diff 
- # Currently Hosted on [Replit.com](https://replit.com/@xyzabc10) and Has i-dont-know-how-many commands.
- ```
+#### Currently Hosted on [Replit.com](https://replit.com/@xyzabc10) and Has i-dont-know-how-many commands.
 
