@@ -111,7 +111,7 @@ class Bot(commands.AutoShardedBot):
                 req=self.model.think(ctx.message.content)
             else:
                 req=0
-            if req>88:
+            if req>89.69:
                 em=discord.Embed(
                     title="**`Message Violated and Tried to bypass Moderation through Toxicity`**",
                     description=f"`{ctx.message.content} violated at a score of {req}%`",
@@ -120,7 +120,7 @@ class Bot(commands.AutoShardedBot):
                 )
                 em.set_author(name=ctx.author.display_name,url=ctx.author.display_avatar.url)
                 em.set_footer(text="I see all")
-                await ctx.delete()
+                await ctx.message.delete()
                 await ctx.channel.send(embed=em)
             await self.process_commands(ctx.message)
     
@@ -128,6 +128,12 @@ class Bot(commands.AutoShardedBot):
         return string
     async def _decrypt(self,bytesstr):
         return bytesstr
+
+    async def on_guild_join(self,guild):
+        self.db.addGuild(guild.id)
+
+    async def on_guild_remove(self,guild):
+        self.db.removeGuild(guild.id)
 #Startup Log
 '''
 @bot.event

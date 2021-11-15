@@ -178,5 +178,12 @@ class ChannelModeration(Cog):
         else:
             await ctx.channel.send(f"`Something went wrong || Report this Error ID and Error Context to Developers in `[We don't have a Server Yet]` || ID: {await self.bot._encrypt(str(error))}`")  
     
+    @commands.command(name='addlog',aliases=['setlog'])
+    @bot_has_permissions(manage_channels=True)
+    @has_permissions(manage_channels=True)
+    async def addlog_command(self,ctx,log:TextChannel):
+        self.bot.db.addLogChannel(ctx.guild.id, log.id)
+            
+        await ctx.send(f"`Registered {log.name} as Log Channel`")
 def setup(bot):
     bot.add_cog(ChannelModeration(bot))

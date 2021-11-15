@@ -6,11 +6,11 @@ class Guilds:
         with open(self.fp,'r') as fp:
             self.dict=ujson.loads(fp.read())
 
-    #Normal Functions - Daniel
+    #Normal Functions
         
     def addGuild(self,id,extra_params=None):
         self.dict.update({
-            id:{
+            str(id):{
                 "prefix":None,
                 "muted_role":None,
                 "log_channel":None,
@@ -21,7 +21,7 @@ class Guilds:
             }
         })
         if extra_params is not None:
-            self.dict[id].update(extra_params)
+            self.dict[str(id)].update(extra_params)
     
     def removeGuild(self,id):
         self.dict.pop(id)

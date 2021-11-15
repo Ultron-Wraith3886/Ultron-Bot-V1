@@ -78,7 +78,7 @@ class MemberModeration(Cog):
         
         em=discord.Embed(
             title='**`Added Role(s)`**',
-            description="**`{ctx.author.display_name}`**` to`**`{member.display_name}`**",
+            description=f"**`{ctx.author.display_name}`**` to`**`{member.display_name}`**",
             color=discord.Color.from_rgb(0,0,0),
             url="https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             timestamp=dt.now()
@@ -124,7 +124,7 @@ class MemberModeration(Cog):
         await member.add_roles(role,reason=reason)
         em=discord.Embed(
             title='**`Added Role(s)`**',
-            description="**`{ctx.author.display_name}`**` Added roles to `**`{member.display_name}`**",
+            description=f"**`{ctx.author.display_name}`**` Added roles to `**`{member.display_name}`**",
             color=discord.Color.from_rgb(0,0,0),
             url="https://www.youtube.com/watch?v=dQw4w9WgXcQ",
             timestamp=dt.now()
