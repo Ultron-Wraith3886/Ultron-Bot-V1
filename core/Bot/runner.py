@@ -95,8 +95,8 @@ class Bot(commands.AutoShardedBot):
         print('Ultron™ | Made and Maintained by Wraith#3886')
         print('_________________________________________________')
 
-    async def prefix(self, bot, msg):
-        return commands.when_mentioned_or(".")(bot, msg)
+    #async def prefix(self, bot, msg):
+        #return commands.when_mentioned_or(".")(bot, msg)
 
     async def process_commands(self, msg):
         ctx = await self.get_context(msg, cls=commands.Context)
@@ -108,7 +108,7 @@ class Bot(commands.AutoShardedBot):
         ctx=await self.get_context(ctx)
         if not ctx.author.bot:
             if (ctx.author != ctx.guild.owner or ctx.author.id==self._owner_id) and not(ctx.message.content.startswith(self.prefix)):
-                req=self.model.think(ctx.message.content)
+                req=0
             else:
                 req=0
             if req>89.69:

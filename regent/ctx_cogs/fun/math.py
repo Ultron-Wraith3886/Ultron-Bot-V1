@@ -27,10 +27,16 @@ class MathFun(Cog):
                 num=""
             else:
                 thing='({})'
-            await ctx.send("`Math Result : {}`".format(eval("".join(['math.',func,thing.format(num)]))))
-        except Exception as e:
-            print(e)
+            await ctx.send("`Math Result : {}`".format(round(eval("".join(['math.',func,thing.format(num)])),3)))
+        except Exception:
             await ctx.send("`Math Commands!`")
+
+    @math_command.command(name="solve",aliases=['do','calc'])
+    async def solve_command(self,ctx,*,exp:Optional[str]='1+1'):
+        if len(exp)>50:
+            return await ctx.send("`Cannot calculate More than 50 Characters of Literals.`")
+
+        await ctx.send(f"`The Answer to this expression is {eval(exp)}`")
 
     @math_command.command(name="add",aliases=['plus','sum'])
     async def add_command(self,ctx,num1:Optional[int]=69,num2:Optional[int]=420):
@@ -56,7 +62,7 @@ class MathFun(Cog):
             return await ctx.send("`I cannot calculate division above 10,000`")
         if (num1==0) or (num2==0):
             return await ctx.send("`Cannot divide by/or Zero`")
-        await ctx.send(f"`{num1} / {num2} = {round((num1/num2)*10000)/10000}`")
+        await ctx.send(f"`{num1} / {num2} = {round(num1/num2,4)}`")
 
     @math_command.command(name="fibnum")
     async def fibnum_command(self,ctx,n:Optional[int]=0):
@@ -75,7 +81,7 @@ class MathFun(Cog):
     async def sqrt_command(self,ctx,n:Optional[int]=1):
         if (n>420) :
             return await ctx.send("`I cannot Sq.Root the number which is more than 420`".format(n))
-        await ctx.send(f"`root {n} = {round(math.sqrt(n)*10000)/10000}`")
+        await ctx.send(f"`root {n} = {round(math.sqrt(n),4)}`")
 
 
 def setup(bot):

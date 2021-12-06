@@ -1,11 +1,6 @@
-import os,json
+import os
 from pathlib import Path
-import grequests as requests
-from typing import Optional
-
-from datetime import datetime as dt
-
-import pokebase as pb
+from aasr.Requests import AAS_URLInterface
 
 class CogRouter:
     def __init__(self,exclude_cogs=['__pycache__']):
@@ -24,6 +19,7 @@ class CogRouter:
     
 class APIRouter_REST:
     def __init__(self,apis='all'):
+        self.requests=AAS_URLInterface(request_limit_per_host=60)
         self.api_collection={
             "axolotl":{
                 "url":"https://axoltlapi.herokuapp.com/"
@@ -68,9 +64,19 @@ class APIRouter_REST:
                 meth=self.api_allowed[api_name]['meth']
             else:
                 meth='url'
-            return json.loads(requests.map([requests.get(self.api_allowed[api_name]['url']+extra_param)])[0].content.decode('utf-8')),meth
-        except:
+            r=await self.requests.map([await self.requests.get(url=self.api_allowed[api_name]['url']+extra_param)], load=True)
+            return r,meth
+        except Exception as e:
+            print(e)
             return None,None
+
+    async def mass_requestRoute(self,apis:list=[]):
+        req=[]
+        for api in apis:
+            meth=self.api_allowed[api]['meth'] if ['meth'] in self.api_allowed[api] else ''
+            req.append({"".join[api,'/',meth]})
+        f=await self.requests.map(req,load=True)
+        return f
 
 class APIRouter_Anime:
     def __init__(self,apis='all'):
@@ -93,13 +99,15 @@ class APIRouter_Anime:
             for api in apis:
                 self.api_allowed.update({api:self.api_collection[api]})
                 self.api_names.append(api.capitalize())
+
     async def requestRoute(self,api_name:str='quote',extra_param=''):
         try:
             if 'meth' in self.api_allowed[api_name].keys():
                 meth=self.api_allowed[api_name]['meth']
             else:
                 meth='url'
-            return json.loads(requests.map([requests.get(self.api_allowed[api_name]['url']+extra_param)])[0].content.decode('utf-8')),meth
+            r=await self.requests.map([await self.requests.get(url=self.api_allowed[api_name]['url']+extra_param)], load=True)
+            return r[0],meth
         except Exception as e:
             print(e)
             return None,None

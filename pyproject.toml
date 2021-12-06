@@ -13,6 +13,12 @@ grequests = "^0.6.0"
 pokebase = "^1.3.0"
 ujson = "^4.2.0"
 nextcord = {git = "https://github.com/nextcord/nextcord.git", rev = "master"}
+sympy = "^1.9"
+psutil = "^5.8.0"
+aas-r = "0.0.5"
+PyDictionary = "^2.0.1"
+wikipedia = "^1.4.0"
+asyncpraw = "^7.5.0"
 
 [tool.poetry.dev-dependencies]
 

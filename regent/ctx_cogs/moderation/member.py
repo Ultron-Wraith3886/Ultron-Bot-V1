@@ -594,10 +594,14 @@ class MemberModeration(Cog):
         roles=[str(role.name) for role in member.roles]
         infos=[member.created_at.strftime("%d %m %Y"),member.joined_at.strftime("%d %m %Y"),member.guild_permissions,member.pending,member.premium_since.strftime("%d %m %Y") if member.premium_since is not None else None,member.top_role,member.bot,member.is_on_mobile(),member.activity]
         flags=[flag for flag in member.public_flags.all()]
-        if self.bot.db.ismuted(ctx.guild.id,member.id):
-            muted=True
-        else:
-            muted=False
+        try:
+            e=self.bot.db.ismuted(ctx.guild.id,member.id)
+            if e:
+                muted=True
+            else:
+                muted=False
+        except:
+            muted="Can't find"
 
         em=discord.Embed(
             title="`Member Information`",
@@ -621,7 +625,7 @@ class MemberModeration(Cog):
             ("__Verification Pending?__",infos[3],True),
             ("__Is Muted?__",muted,True),
             #("__Activity__",infos[8],False),
-            ("__Public Flags__",'\n'.join([str(flag)[10:] for flag in flags]),False),
+            ("__Public Flags__",'\n'.join([str(flag)[10:] for flag in flags]) if len(flags)>0 else 'No Flags',False),
         ]
         for name,value,inline in fields:
             em.add_field(name=name,value=value,inline=inline)

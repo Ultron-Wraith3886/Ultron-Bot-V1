@@ -1,5 +1,4 @@
-import nextcord as discord
-from nextcord.ext import commands
+from nextcord.ext import commands, tasks
 from nextcord.ext.commands import Cog
 
 from nextcord import Embed,Color
@@ -29,10 +28,10 @@ class FunCommands(Cog):
             tag=tag.split()
             del tag[0]
             embed=Embed(
-                title="**6 Top Image Tags related to the Query**",
+                title="**3 Top Image Tags related to the Query**",
                 color=Color.from_rgb(0,0,0)
             )
-            fields=get_close_matches(" ".join(tag),self.api_names,6,0.25)
+            fields=get_close_matches(" ".join(tag),self.api_names,3,0.25)
             embed.set_author(name=ctx.author.display_name,icon_url=ctx.author.display_avatar.url)
             for indx,name in enumerate(fields):
                 embed.add_field(name=f"{indx+1} - {name}",value="_ _",inline=False)
@@ -45,6 +44,7 @@ class FunCommands(Cog):
             else:
                 closest=closest[0]
             resp,meth=await self.bot._api_router.requestRoute(api_name=closest.lower())
+            resp=resp[0]
             if resp is not None:
                 embed=Embed(
                     title="**Image Result!**",
@@ -54,6 +54,8 @@ class FunCommands(Cog):
                 embed.set_image(url=resp[meth])
                 if closest == 'Dogs':
                     factresp,meth=await self.bot._api_router.requestRoute(api_name='dog-facts')
+                    print(factresp)
+                    factresp=factresp
                 else:
                     factresp=None
                 if factresp is not None:
@@ -62,7 +64,7 @@ class FunCommands(Cog):
                     embed.add_field(name=f"**Fact** - **`{factresp[meth]}`**",value="_ _",inline=False)
                 else:
                     if meth in resp.keys():
-                        embed.add_field(name=f"**Fact** - **`{resp['facts']}`**",value="_ _",inline=False)
+                        embed.add_field(name=f"**Fact** - **`{resp['facts'] if 'facts' in resp else 'N/A'}`**",value="_ _",inline=False)
             else:
                 return await ctx.send(f"`Thats an Unrecognized Image Tag!, consider doing - [{self.bot.prefix}image ] to get all the tags or do [{self.bot.prefix}image search tag-name ] to get related tags your tag-name!`")
             
