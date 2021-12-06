@@ -16,6 +16,11 @@ class LinearEQ(Cog):
         except:
             return False
 
+    def givedot(self,dot):
+        if dot=='.':
+            return dot
+        return ''
+
     async def qsolve(self,inp):
         inp = inp.split(sep='=',maxsplit=1)
         lhs=inp[0].split()
@@ -24,7 +29,7 @@ class LinearEQ(Cog):
         
         for indx,term in enumerate(lhs):
             if self.iscof(term):
-                num="".join([str(int(s)) if s.isdigit() else s for s in term])
+                num="".join([str(int(s)) if s.isdigit() else self.givedot(s) for s in term])
                 if self.isfloat(num):
                     num=str(float(num))
                 arith_op='*'
@@ -40,7 +45,7 @@ class LinearEQ(Cog):
         rhs=inp[1].split()
         for indx,term in enumerate(rhs):
             if self.iscof(term):
-                num="".join([str(int(s)) if s.isdigit() else s for s in term])
+                num="".join([str(int(s)) if s.isdigit() else self.givedot(s) for s in term]) 
                 if self.isfloat(num):
                     num=str(float(num))
                 arith_op='*'
@@ -64,7 +69,6 @@ class LinearEQ(Cog):
                 if itm.isalpha():
                     lt_ce=Symbol(itm)
                     newrhs=''.join(newrhs).replace(itm,'lt_ce')
-        
 
         solved=solve(eval(''.join(newlhs))-eval(''.join(newrhs)),lt_ce)
         
