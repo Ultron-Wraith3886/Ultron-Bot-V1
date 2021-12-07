@@ -78,6 +78,9 @@ class APIRouter_REST:
         f=await self.requests.map(req,load=True)
         return f
 
+    async def refresh(self):
+      self.requests.refresh()
+
 class APIRouter_Anime:
     def __init__(self,apis='all'):
         self.api_collection={

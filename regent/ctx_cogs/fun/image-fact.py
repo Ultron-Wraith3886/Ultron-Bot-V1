@@ -44,6 +44,7 @@ class FunCommands(Cog):
             else:
                 closest=closest[0]
             resp,meth=await self.bot._api_router.requestRoute(api_name=closest.lower())
+            await self.bot._api_router.refresh()
             resp=resp[0]
             if resp is not None:
                 embed=Embed(
@@ -54,7 +55,8 @@ class FunCommands(Cog):
                 embed.set_image(url=resp[meth])
                 if closest == 'Dogs':
                     factresp,meth=await self.bot._api_router.requestRoute(api_name='dog-facts')
-                    print(factresp)
+                    factresp=factresp[0]
+                    await self.bot._api_router.refresh()
                     factresp=factresp
                 else:
                     factresp=None

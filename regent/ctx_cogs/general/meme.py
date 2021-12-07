@@ -32,7 +32,7 @@ class MemeFun(Cog):
                 self.memes[subr].update({cat:[]})
 
         self.gather_meme_first.start()
-        #self.gather_meme_second.start()
+        self.gather_meme_second.start()
 
 
     @command(name="meme",aliases=['bored'])
@@ -83,8 +83,9 @@ class MemeFun(Cog):
         for i in self.subs:
             subr=await self.reddit.subreddit(i)
             for cat in self.cats_2:
-                async for sub in eval("".join(['subr.',cat,'(limit=300)'])):
-                    self.memes[subr][cat].append(sub)
+                x=eval("".join(['subr.',cat,'(limit=300)']))
+                async for sub in x:
+                    self.memes[i][cat].append(sub)
         self.loaded_cat_2=True
 
     @gather_meme_first.before_loop
