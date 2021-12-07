@@ -417,21 +417,14 @@ description = "A Python wrapper for the Discord API forked from discord.py"
 category = "main"
 optional = false
 python-versions = ">=3.8.0"
-develop = false
 
 [package.dependencies]
 aiohttp = ">=3.6.0,<3.8.0"
 
 [package.extras]
-docs = ["sphinx (==4.0.2)", "sphinxcontrib-trio (==1.1.2)", "sphinxcontrib-websupport"]
+docs = ["sphinx (==4.0.2)", "sphinxcontrib_trio (==1.1.2)", "sphinxcontrib-websupport"]
 speed = ["orjson (>=3.5.4)", "aiodns (>=1.1)", "brotli", "cchardet"]
 voice = ["PyNaCl (>=1.3.0,<1.5)"]
-
-[package.source]
-type = "git"
-url = "https://github.com/nextcord/nextcord.git"
-reference = "master"
-resolved_reference = "9aaca1e70b932ce07b090af7f969062f88d3dd81"
 
 [[package]]
 name = "pokebase"
@@ -676,7 +669,7 @@ testing = ["coverage (>=5.0.3)", "zope.event", "zope.testing"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "d3f4b42b950e3058bc814dccc39cec52c7cfed6f70fa71b29ddcf496a58d67ea"
+content-hash = "dbd8da9f3bec8581ec09ef4ca67751d4d4d548cf87d9b70f5eb116700b8a84e6"
 
 [metadata.files]
 aas-r = [
@@ -1041,7 +1034,9 @@ multidict = [
     {file = "multidict-5.2.0-cp39-cp39-win_amd64.whl", hash = "sha256:c9631c642e08b9fff1c6255487e62971d8b8e821808ddd013d8ac058087591ac"},
     {file = "multidict-5.2.0.tar.gz", hash = "sha256:0dd1c93edb444b33ba2274b66f63def8a327d607c6c790772f448a53b6ea59ce"},
 ]
-nextcord = []
+nextcord = [
+    {file = "nextcord-2.0.0a3.tar.gz", hash = "sha256:f45933be7052db13d29ef30061ef75af3d413dfcb0d1f7c3757fe7f8478002f1"},
+]
 pokebase = [
     {file = "pokebase-1.3.0-py3-none-any.whl", hash = "sha256:a5881566bfaa6f9a860b847be0a648f23b02babdaf79ab96f6a6d0295b497c34"},
     {file = "pokebase-1.3.0.tar.gz", hash = "sha256:1fab389df211f22d0987e8aae45d0d19b5db7b3eb0c92dca48283f74e9df4f70"},

@@ -1,14 +1,13 @@
  #Dependancies
 import os
 import nextcord as discord
-from pathlib import Path
-from nextcord.ext import commands
+from nextcord.ext.commands import AutoShardedBot, Context
 
 from database import database
 
 #MODELS
 #from core.Models.UltronAI.Layers.directProfanity import profanityDirect
-from core.Resources.UltronAI.Layers.profanityAI import bertia
+#from core.Resources.UltronAI.Layers.profanityAI import bertia
 from regent.Routers import router
 from core.Config import config
 
@@ -18,7 +17,7 @@ bot = commands.Bot(command_prefix='.')
 intents = discord.Intents.all()
 bot.remove_command("help")'''
 
-class Bot(commands.AutoShardedBot):
+class Bot(AutoShardedBot):
     def __init__(self):
         self._configurator=config.Configuration()
         print(self._configurator.splash)
@@ -37,8 +36,8 @@ class Bot(commands.AutoShardedBot):
         self.shard_count=1
         Intents=discord.Intents.all()
         super().__init__(command_prefix=self.prefix,intents=Intents ,case_insensitive=True)
-        self.model=bertia.machineCore(self._configurator.machine_core)
-        self.model.initiate()
+        #self.model=bertia.machineCore(self._configurator.machine_core)
+        #elf.model.initiate()
 
     def setup(self):
         print("\n\n---Loading Extensions and Commands---\n")
@@ -99,7 +98,7 @@ class Bot(commands.AutoShardedBot):
         #return commands.when_mentioned_or(".")(bot, msg)
 
     async def process_commands(self, msg):
-        ctx = await self.get_context(msg, cls=commands.Context)
+        ctx = await self.get_context(msg, cls=Context)
 
         if ctx.command is not None:
             await self.invoke(ctx)

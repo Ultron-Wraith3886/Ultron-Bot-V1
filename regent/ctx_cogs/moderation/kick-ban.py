@@ -113,11 +113,12 @@ class KickBanModeration(Cog):
     @commands.command(name='unban',aliases=['comeback','jailbreak','returnofthelegend'])
     @has_permissions(ban_members=True)
     @bot_has_permissions(ban_members=True)
-    async def unban_command(self,ctx,targets:Greedy[Member],*,reason:Optional[str]="`No reason was Provided`"):
+    async def unban_command(self,ctx,targets:Greedy[int],*,reason:Optional[str]="`No reason was Provided`"):
         if not len(targets):
             return await ctx.channel.send("`You didn't specify any Members. Kindly do so if you want to unban some`")
         
-        for target in targets:
+        for t in targets:
+            target=await self.bot.fetch_user(t)
             await target.unban(reason=reason)
             em=discord.Embed(
                 title="**`Member was Unbanned`**",

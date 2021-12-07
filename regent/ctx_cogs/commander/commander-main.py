@@ -1,4 +1,5 @@
 import nextcord as discord
+from nextcord import Embed, Color
 from nextcord.ext.commands import is_owner, Cog, group,command
 from typing import Optional
 
@@ -13,9 +14,15 @@ class Evaluator(Cog):
     @is_owner()
     async def eval_grp(self,ctx,*,command:Optional[str]=''):
         try:
-            await ctx.send(eval(command))
+            r=eval(command.replace('```',''))
         except Exception as e:
-            await ctx.send(e)
+            r=e
+        em=Embed(
+            title='**`Evaluation`**',
+            description='```{}```'.format(r),
+            color=Color.from_rgb(0,0,0)
+        )
+        await ctx.send(embed=em)
 
     @eval_grp.command(name='msg')
     @is_owner()
